@@ -1,12 +1,20 @@
+
 from nada_dsl import *
 
 def nada_main():
-    party1 = Party(name="Party1")
-    my_int1 = SecretInteger(Input(name="my_int1", party=party1))
-    my_int2 = SecretInteger(Input(name="my_int2", party=party1))
+    # Define two parties: Alice and Bob
+    alice = Party(name="Alice")
+    bob = Party(name="Bob")
 
-    # compute the product of my_int1 and my_int2
-    result = my_int1 * my_int2
+    # Define two secret integers: x and y
+    x = SecretInteger(Input(name="x", party=alice))
+    y = SecretInteger(Input(name="y", party=bob))
 
-    # return the result as the output
-    return [Output(result, "my_output", party1)]
+    # Compute the product of x and y securely
+    product = x * y
+
+    # Compute the square of the product
+    square = product * product
+
+    # Return the square as the output
+    return [Output(square, "square_xy", alice)]
